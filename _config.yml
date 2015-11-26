@@ -11,13 +11,13 @@ url: "http://yourdomain.com" # the base hostname & protocol for your site
 
 # Sidebar filter
 # Choose 'tag' or 'category' as filter in sidebar.
-filter: 'tag'
+filter: 'category'
 
 
 # Social account
 # twitter:  username
 # weibo:    ID
-# github:   username
+ github:   liuious
 # codepen:  username
 # dribbble: username
 
