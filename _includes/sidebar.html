@@ -38,7 +38,7 @@
         {% endfor %}
       {% elsif site.filter == 'tag' %}
         {% for post in site.posts %}
-          <a class="toc-link" data-tags="{{ post.tags | join: ' ' }}" href="{{ post.url }}">
+          <a class="toc-link" data-tags="{{ post.tags | join: ' ' }}" href="github.arthurliu.cn.com{{ post.url }}">
             {{ post.title }}
           </a>
         {% endfor %}
