@@ -29,7 +29,7 @@ github:   liuious
 # Google Analytics
 # google_analytics: tracking_ID
 
-highlighter: rouge
+highlighter: pygments
 
 
 # Build settings
