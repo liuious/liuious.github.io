@@ -3,7 +3,7 @@ layout: post
 title: 基于fink的opencv搭建
 author: Arthur
 date: 2016-07-27 14:15:44 +0800
-tags: OpenCV 关于
+tags: OpenCV
 ---
 
 转自[在MacOSX10.6下编译安装高性能OpenCV库](http://tianchunbinghe.blog.163.com/blog/static/7001201151592834161/)

@@ -3,7 +3,7 @@ layout: post
 title: SDWebImage学习笔记
 author: Arthur
 date: 2016-07-27 14:51:01 +0800
-tags: iOS vander
+tags: iOS
 ---
 
 SDWebImage托管在github上[https://github.com/rs/SDWebImage](SDWebImage托管在github上。https://github.com/rs/SDWebImage)  
@@ -27,7 +27,7 @@ SDWebImage托管在github上[https://github.com/rs/SDWebImage](SDWebImage托管�
 **主要代码解析：**  
 下载的枚举类型   
 
-```
+{% highlight c %}
 typedef NS_OPTIONS(NSUInteger, SDWebImageDownloaderOptions) {
    
   SDWebImageDownloaderLowPriority = 1 << 0,
@@ -79,12 +79,12 @@ typedef NS_OPTIONS(NSUInteger, SDWebImageDownloaderOptions) {
    */
   SDWebImageDownloaderHighPriority = 1 << 7,
 }; 
-```
+{% endhighlight %}
 
 下载顺序:
-
-``` 
 SDWebImage提供了两种下载顺序，一种是以队列方式（先进先出），一种是以栈的方式（后进先出）。 
+
+{% highlight c %}
 typedef NS_ENUM (NSInteger, SDWebImageDownloaderExecutionOrder) { 
     /**
      * Default value. All download operations will execute in queue style (first-in-first-out).
@@ -97,12 +97,12 @@ typedef NS_ENUM (NSInteger, SDWebImageDownloaderExecutionOrder) {
      */
     SDWebImageDownloaderLIFOExecutionOrder
 };
-```
+{% endhighlight %}
 
 下载任务管理器
 SDWebImageDownloader下载管理器是一个单例类，主要负责图片的下载操作管理，图片的下载是放在一个NSOperationQueue操作队列中来完成的，它的声明如下：
 
-```
+{% highlight c %}
 @property (strong, nonatomic) NSOperationQueue *downloadQueue;  //使用NSOperationQueue操作队列来完成下来
 默认情况下，队列最大的并发数是6，如果需要我们可以通过SDWebImageDownloader类的maxConcurrentDownloads属性来修改。
 所有下载操作的网络响应序列化处理都放在一个自定义的并行调度队列中来处理，其声明及定义如下： 
@@ -115,11 +115,11 @@ SDWebImageDownloader下载管理器是一个单例类，主要负责图片的下
     }
     return self;
 }
-```
+{% endhighlight %}
 
 每一个图片的下载都会对应一些回调操作，如下载进度回调、下载结果回调等，这些回调操作是block形式来呈现，为此在SDWebImageDownloader.h中定义了几个block，
 
-```
+{% highlight c %}
 /**
  *  下载进度回调
  */
@@ -132,11 +132,11 @@ typedef void(^SDWebImageDownloaderCompletedBlock)(UIImage *image, NSData *data, 
  *  Header过滤
  */
 typedef NSDictionary *(^SDWebImageDownloaderHeadersFilterBlock)(NSURL *url, NSDictionary *headers);
-```
+{% endhighlight %}
 
 图片下载的这些回调信息存储在SDWebImageDownloader类的URLCallbacks属性中，该属性是个字典，key为图片的URL地址，value是个数组，包含每个图片的多组回调信息，由于我们允许多个图片同事下载，因此可能会有多个线程对URLCallbacks同事操作，为了保证URLCallbacks操作的线程安全性，SDWebImageDownloader将这些操作作为一个任务放在barrierQueue队列中，并设置屏障来确保同一时间只有一个线程操作URLCallbacks属性，我们以添加操作为例， 
 
-```
+{% highlight c %}
 - (void)addProgressCallback:(SDWebImageDownloaderProgressBlock)progressBlock andCompletedBlock:(SDWebImageDownloaderCompletedBlock)completedBlock forURL:(NSURL *)url createCallback:(SDWebImageNoParamsBlock)createCallback {
  ...
  
@@ -159,4 +159,4 @@ typedef NSDictionary *(^SDWebImageDownloaderHeadersFilterBlock)(NSURL *url, NSDi
         }
     });
 }
-```
+{% endhighlight %}
