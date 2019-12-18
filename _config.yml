@@ -32,7 +32,7 @@ github:   liuious
 duoshuo: arthurliu
 
 
-highlighter: pygments
+highlighter: rouge
 
 
 # Build settings
